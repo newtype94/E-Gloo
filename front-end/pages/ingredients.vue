@@ -1,75 +1,75 @@
 <template>
   <div>
-    <div class="wrap">
-      <div class="tabs">
-        <TabItem
-          v-for="item in list"
-          v-bind="item"
-          :key="item.id"
-          v-model="currentId"
-        />
-      </div>
-    </div>
-    <div class="contents">
-      <section :key="currentId">
-        <grid
-          v-if="current.content == 'ingredients'"
-          :component="ingredient"
-          :list="ingredients"
-          :size="4"
-          :columnGap="2"
-          :rowGap="0.5"
-          :margin="2"
-        />
-        <span v-if="current.content != 'ingredients'">{{
-          current.content
-        }}</span>
-      </section>
-    </div>
+    <v-container style="width: 400px">
+      <div class="ingredientsPageHeader">내 재료</div>
+      <v-tabs fixed-tabs style="color: #e57979">
+        <v-tab
+          v-for="{ category } in ingredients"
+          v-bind:key="category"
+          class="ingredientsTabs"
+          >{{ category }}</v-tab
+        >
+        <v-tab-item
+          v-for="{ category, content } in ingredients"
+          v-bind:key="category"
+        >
+          <IngredientsGrid
+            :category="category"
+            :ingredients="content"
+          ></IngredientsGrid>
+        </v-tab-item>
+      </v-tabs>
+    </v-container>
   </div>
 </template>
+
 <script>
-import TabItem from "~/components/TabItem";
-import ingredient from "~/components/Ingredient";
-import Grid from "~/components/Grid";
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
+import IngredientsGrid from "@/components/IngredientsGrid";
 
 export default {
-  components: { TabItem, ingredient, Grid },
-  data() {
-    return {
-      list: [
-        { id: 1, label: "쌀/잡곡", content: "ingredients" },
-        { id: 2, label: "과일", content: "item2" },
-        { id: 3, label: "채소", content: "item3" },
-        { id: 4, label: "정육/계란", content: "item4" },
-        { id: 5, label: "우유/유제품", content: "item5" }
-      ],
-      currentId: 1,
-      ingredient
-    };
+  components: {
+    IngredientsGrid,
   },
+  async asyncData({ route, store }) {
+    const { query } = route;
+
+    await store.dispatch("ingredients/getIngredients", {}, { root: true });
+  },
+  data() {
+    return {};
+  },
+  props: {},
   computed: {
-    current() {
-      return this.list.find(el => el.id === this.currentId) || {};
-    },
-    ...mapState(["ingredients"])
-  }
+    ...mapGetters(["isAuthenticated", "loggedInUser"]),
+    ...mapState("ingredients", ["ingredients", "userIngredients"]),
+  },
+  methods: {},
 };
 </script>
 
 <style scoped>
-.wrap {
-  border-bottom: 0.06rem solid #e0e0e0;
-  margin-bottom: 0.56rem;
+.ingredientsPageHeader {
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 29px;
+  height: 100px;
+  text-align: center;
+
+  color: #4f4f4f;
 }
-.tabs {
-  margin: 0 1.63rem -0.06rem 1.63rem;
-  display: flex;
-  justify-content: stretch;
-}
-.contents {
-  position: relative;
-  overflow: scroll;
+.ingredientsTabs {
+  font-family: Noto Sans KR;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 17px;
+  padding: 0px;
+  min-width: 60px;
+
+  text-align: center;
+  color: #b9b9b9;
 }
 </style>

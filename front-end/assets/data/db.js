@@ -6,8 +6,8 @@ export const users = [
       "http://img4.tmon.kr/cdn3/deals/2020/08/18/4212779218/front_f5a6b_f3qer.jpg",
     userIntro: "소소하지만 홈쿡생활 @mh9406\nhttp://www.instagram.com/9406",
     follower: 200,
-    following: 350
-  }
+    following: 350,
+  },
 ];
 
 export const recipes = [
@@ -21,7 +21,7 @@ export const recipes = [
     recipeCookTime: 15,
     recipeBudget: 7000,
     ingredients: ["달걀", "스팸", "식용유", "통깨", "밥", "대파", "올리브"],
-    bookmark: false
+    bookmark: false,
   },
   {
     recipeId: 2,
@@ -33,7 +33,7 @@ export const recipes = [
     recipeCookTime: 20,
     recipeBudget: 7000,
     ingredients: ["달걀", "스팸", "식용유", "통깨", "밥", "대파", "올리브"],
-    bookmark: false
+    bookmark: false,
   },
   {
     recipeId: 3,
@@ -45,7 +45,7 @@ export const recipes = [
     recipeCookTime: 10,
     recipeBudget: 7000,
     ingredients: ["달걀", "스팸", "식용유", "통깨", "밥", "대파", "올리브"],
-    bookmark: false
+    bookmark: false,
   },
   {
     recipeId: "4",
@@ -57,27 +57,52 @@ export const recipes = [
     recipeCookTime: 44,
     recipeBudget: 7000,
     ingredients: ["달걀", "스팸", "식용유", "통깨", "밥", "대파", "올리브"],
-    bookmark: false
-  }
+    bookmark: false,
+  },
 ];
 
 export const myFollowings = [
   {
     userId: "mh9406",
-    follow: false
-  }
+    follow: false,
+  },
 ];
 
 export const myBookmarks = [
   {
     userId: "mh9406",
-    bookmarks: [1, 2]
-  }
+    bookmarks: [1, 2],
+  },
 ];
 
 export const ingredients = [
+  { category: "쌀/잡곡", content: ["쌀", "현미", "보리", "콩"] },
+  { category: "과일", content: ["사과", "포도", "딸기", "수박"] },
+  { category: "채소", content: ["당근", "양파", "피망", "양배추", "양상추"] },
+  {
+    category: "정육/계란",
+    content: [
+      "닭가슴살",
+      "소등심",
+      "소안심",
+      "돼지삼겹살",
+      "돼지목살",
+      "닭다리",
+      "닭날개",
+    ],
+  },
+  { category: "우유/유제품", content: ["우유", "요구르트"] },
+];
+
+export const usersIngredients = [
   {
     userId: "mh9406",
-    ingredients: []
-  }
+    ingredients: [
+      { category: "쌀/잡곡", content: [] },
+      { category: "과일", content: [] },
+      { category: "채소", content: [] },
+      { category: "정육/계란", content: [] },
+      { category: "우유/유제품", content: [] },
+    ],
+  },
 ];
