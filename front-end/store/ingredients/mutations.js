@@ -5,3 +5,8 @@ export const getIngredients = (state, { ingredients }) => {
 export const getUserIngredients = (state, { userIngredients }) => {
   state.userIngredients = userIngredients;
 };
+
+export const updateSelectedIngredients = (state, { selectedIngredients }) => {
+  state.selectedIngredients = selectedIngredients;
+};
+

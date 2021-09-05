@@ -1,4 +1,4 @@
 export const state = () => ({
   ingredients: [],
-  userIngredients: [],
+  selectedIngredients: [],
 });

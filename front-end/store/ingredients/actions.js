@@ -1,6 +1,6 @@
 import { ingredients, usersIngredients } from "~/assets/data/db";
 
-export const getIngredients = ({ commit }, {}) => {
+export const getIngredients = ({ commit }, { }) => {
   //Ingredients get : axios.get()으로 변경
   const fullIngredients = [...ingredients];
 
@@ -19,12 +19,29 @@ export const getUserIngredients = ({ commit }, { userId }) => {
 
 //모든 재료 선택 완료 후 post하는지
 //개별 재료 선택마다 post하는지 확인 필요
-export const updateUserIngredients = async (
+export const updateIngredients = async (
   { dispatch },
-  { userId, category, content }
+  { userId }
 ) => {
   //UserIngredients update : await axios.post()로 변경
+};
 
-  //업데이트 된 유저 재료로 state mutation
-  dispatch("getUserIngredients", { userId });
+export const selectIngredients = async (
+  { state, commit },
+  { category, content }
+) => {
+  const selectedIngredients = [...state.selectedIngredients];
+  selectedIngredients.push({ category, content })
+  commit("updateSelectedIngredients", { selectedIngredients });
+};
+
+export const exceptIngredients = async (
+  { state, commit },
+  { category, content }
+) => {
+  const selectedIngredients = [...state.selectedIngredients].filter(
+    ig => !(ig.category === category && ig.content === content)
+  )
+
+  commit("updateSelectedIngredients", { selectedIngredients });
 };
